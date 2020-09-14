@@ -1,6 +1,8 @@
 import React from 'react';
 import './form.scss';
 
+import MethodButton from './methodButton.js';
+
 export default class Form extends React.Component {
 
     constructor(props) {
@@ -10,8 +12,43 @@ export default class Form extends React.Component {
 
             method: 'GET',
             url: '',
+            displaySection: false,
 
         };
+
+        this.handleURLChange = this.handleURLChange.bind(this);
+        this.executeRequest = this.executeRequest.bind(this);
+        this.listCallback = this.listCallback.bind(this);
+
+    };
+
+
+    handleURLChange(e) {
+
+        e.preventDefault();
+        this.setState({
+            url: e.target.value
+        });
+
+    };
+
+
+    executeRequest(e) {
+
+        e.preventDefault();
+        this.setState({
+            displaySection: true
+        });
+
+    };
+
+
+    listCallback(method) {
+
+        this.setState({
+            method: method,
+            displaySection: false,
+        });
 
     };
 
@@ -21,52 +58,40 @@ export default class Form extends React.Component {
         return (
 
             <div id='form-container'>
-                <form id ='form'>
+
+                <div id='form'>
 
                     <section id='url-input'>
-
                         <label>
                             URL:
                         </label>
 
-                        <input type='text' id='url' name='url'></input>
+                        <input onChange={this.handleURLChange} value={this.state.url} type='text' id='url' name='url'></input>
 
-                        <button type='submit'>
+                        <button onClick={this.executeRequest}>
                             GO!
                         </button>
-
                     </section>
 
-                    <ul>
 
-                        <li onClick={() => this.setState({method: 'GET'})}>
-                            GET
-                        </li>
+                        <ul>
 
-                        <li onClick={() => this.setState({method: 'POST'})}>
-                            POST
-                        </li>
+                            <MethodButton method='GET' activeMethod={this.state.method} methodChange={this.listCallback} />
+                            <MethodButton method='POST' activeMethod={this.state.method} methodChange={this.listCallback}/>
+                            <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback}/>
+                            <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback}/>
 
-                        <li onClick={() => this.setState({method: 'PUT'})}>
-                            PUT
-                        </li>
+                        </ul>
 
-                        <li onClick={() => this.setState({method: 'DELETE'})}>
-                            DELETE
-                        </li>
 
-                    </ul>
+                    {this.state.displaySection ?
+                        <section id='display'>
+                            <p>
+                                {this.state.method} {this.state.url}
+                            </p>
+                        </section> : <section></section>}
 
-                </form>
-
-                <section id='display'>
-
-                    <p>
-                        {this.state.method} {this.state.url}
-                    </p>
-
-                </section>
-
+                </div>
 
             </div>
 
