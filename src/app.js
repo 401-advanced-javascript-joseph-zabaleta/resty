@@ -1,14 +1,16 @@
 import React from 'react';
+import './app.scss';
 
+import Header from './components/header/header.js';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     render() {
 
         return (
 
             <div>
-                Testing
+                <Header />
             </div>
 
         );
@@ -17,4 +19,3 @@ class App extends React.Component {
 
 };
 
-export default App;
