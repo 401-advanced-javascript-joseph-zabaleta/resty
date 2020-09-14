@@ -1,6 +1,8 @@
+@import '../../design/variables';
+
 footer {
 
-    background: grey;
+    background: $primary-footer-color;
     width: 100vw;
     display: flex;
     align-content: center;

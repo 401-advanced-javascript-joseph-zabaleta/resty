@@ -1,3 +1,5 @@
+@import './design/variables';
+
 body {
 
     margin: 0 0;
@@ -10,7 +12,7 @@ div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #F0EBD8;
-    color: black;
+    background-color: $primary-app-background-color;
+    color: $primary-app-color;
 
 }
