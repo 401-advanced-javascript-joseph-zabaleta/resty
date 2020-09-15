@@ -14,6 +14,7 @@ export default class Form extends React.Component {
             method: 'GET',
             url: 'http://localhost:3001/api/v1/categories',
             requestBody: {},
+            errorText: '',
 
         };
 
@@ -45,13 +46,51 @@ export default class Form extends React.Component {
     async executeRequest(e) {
 
         let results;
+        let config = { crossdomain: true };
 
         switch (this.state.method) {
 
             case 'GET':
-                results = await axios.get(this.state.url, { crossdomain: true });
-                console.log(results);
+
+                try {
+
+                    results = await axios.get(this.state.url, config);
+                    console.log(results);
+
+                } catch (error) {
+                    throw error;
+                };
+
                 break;
+
+            case 'POST':
+
+                let requestBody;
+
+                try {
+                    requestBody = JSON.parse(this.state.requestBody);
+                } catch (error) {
+
+                    this.setState({
+                        errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
+                    });
+
+                    return
+
+                };
+
+
+                try {
+
+                    results = await axios.post(this.state.url, requestBody, config);
+                    console.log(results);
+
+                } catch (error) {
+                    throw error;
+                };
+
+                break;
+
             default:
                 break;
 
