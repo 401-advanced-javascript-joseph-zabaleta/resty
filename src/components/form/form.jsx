@@ -124,6 +124,19 @@ export default class Form extends React.Component {
 
                 break;
 
+
+            case 'DELETE':
+
+                try {
+
+                    results = await axios.delete(this.state.url, config);
+
+                } catch (error) {
+                    throw error;
+                };
+
+                break;
+
             default:
                 break;
 
