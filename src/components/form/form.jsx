@@ -13,7 +13,7 @@ export default class Form extends React.Component {
         this.state = {
 
             method: 'GET',
-            url: 'http://localhost:3001/api/v1/categories',
+            url: '',
             requestBody: {},
             errorText: '',
 

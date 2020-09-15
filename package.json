@@ -2,6 +2,7 @@
     "name": "resty",
     "version": "1.0.0",
     "private": true,
+    "homepage": "https://401-advanced-javascript-joseph-zabaleta.github.io/resty/",
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
