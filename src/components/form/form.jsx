@@ -3,6 +3,7 @@ import './form.scss';
 import axios from 'axios';
 
 import MethodButton from './methodButton.jsx';
+import ErrorComponent from '../error/error.jsx';
 
 export default class Form extends React.Component {
 
@@ -79,7 +80,6 @@ export default class Form extends React.Component {
 
                 };
 
-
                 try {
 
                     results = await axios.post(this.state.url, requestBody, config);
@@ -113,6 +113,8 @@ export default class Form extends React.Component {
         return (
 
             <div id='form-container'>
+
+                <ErrorComponent errorText={this.state.errorText} />
 
                 <div id='form'>
 
