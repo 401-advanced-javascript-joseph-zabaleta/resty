@@ -4,13 +4,10 @@ import './error.scss';
 
 export default function errorComponent(props) {
 
-    let display = props.errorText ? '' : 'none';
-    let style = {
-        display: display
-    };
+    if (!props.errorText) return (<></>);
 
     return (
-        <div id='errorBanner' style={style}>
+        <div id='errorBanner'>
             <p>
                 {props.errorText}
             </p>
