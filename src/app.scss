@@ -1,4 +1,4 @@
-@import './design/variables';
+@use './design/design';
 
 body {
 
@@ -12,7 +12,7 @@ div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $primary-app-background-color;
-    color: $primary-app-color;
+    background-color: design.$primary-app-background-color;
+    color: design.$primary-app-color;
 
 }

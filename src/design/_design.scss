@@ -1,15 +1,6 @@
+@use './variables' as *;
 
-// Colors
-$grey: grey;
-$lightgrey: lightgrey;
-$white: white;
-$offwhite: #F0EBD8;
-$whitesmoke: whitesmoke;
-$black: black;
-
-
-// Fonts
-$times-new-roman: 'Times New Roman', Times, serif;
+// Font
 $primary-font: $times-new-roman;
 
 // App Variables
