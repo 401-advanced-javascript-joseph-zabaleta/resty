@@ -95,6 +95,11 @@ export default class Form extends React.Component {
                 break;
 
         }
+
+        this.setState({
+            errorText: ''
+        });
+
     };
 
 
