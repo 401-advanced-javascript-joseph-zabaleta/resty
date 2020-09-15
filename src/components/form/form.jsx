@@ -1,7 +1,8 @@
 import React from 'react';
 import './form.scss';
+import axios from 'axios';
 
-import MethodButton from './methodButton.js';
+import MethodButton from './methodButton.jsx';
 
 export default class Form extends React.Component {
 
@@ -11,12 +12,13 @@ export default class Form extends React.Component {
         this.state = {
 
             method: 'GET',
-            url: '',
-            displaySection: false,
+            url: 'http://localhost:3001/api/v1/categories',
+            requestBody: {},
 
         };
 
         this.handleURLChange = this.handleURLChange.bind(this);
+        this.handleRequestBodyChange = this.handleRequestBodyChange.bind(this);
         this.executeRequest = this.executeRequest.bind(this);
         this.listCallback = this.listCallback.bind(this);
 
@@ -25,7 +27,6 @@ export default class Form extends React.Component {
 
     handleURLChange(e) {
 
-        e.preventDefault();
         this.setState({
             url: e.target.value
         });
@@ -33,13 +34,28 @@ export default class Form extends React.Component {
     };
 
 
-    executeRequest(e) {
+    handleRequestBodyChange(e) {
 
-        e.preventDefault();
         this.setState({
-            displaySection: true
+            requestBody: e.target.value
         });
 
+    };
+
+    async executeRequest(e) {
+
+        let results;
+
+        switch (this.state.method) {
+
+            case 'GET':
+                results = await axios.get(this.state.url, { crossdomain: true });
+                console.log(results);
+                break;
+            default:
+                break;
+
+        }
     };
 
 
@@ -66,7 +82,7 @@ export default class Form extends React.Component {
                             URL:
                         </label>
 
-                        <input onChange={this.handleURLChange} value={this.state.url} type='text' id='url' name='url'></input>
+                        <input onChange={this.handleURLChange} value={this.state.url} type='text'></input>
 
                         <button onClick={this.executeRequest}>
                             GO!
@@ -74,22 +90,15 @@ export default class Form extends React.Component {
                     </section>
 
 
-                        <ul>
+                    <ul>
 
-                            <MethodButton method='GET' activeMethod={this.state.method} methodChange={this.listCallback} />
-                            <MethodButton method='POST' activeMethod={this.state.method} methodChange={this.listCallback}/>
-                            <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback}/>
-                            <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback}/>
+                        <MethodButton method='GET' activeMethod={this.state.method} methodChange={this.listCallback} />
+                        <MethodButton method='POST' activeMethod={this.state.method} methodChange={this.listCallback} />
+                        <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback} />
+                        <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback} />
 
-                        </ul>
-
-
-                    {this.state.displaySection ?
-                        <section id='display'>
-                            <p>
-                                {this.state.method} {this.state.url}
-                            </p>
-                        </section> : <section></section>}
+                        <textarea onChange={this.handleRequestBodyChange} id='request-body-textarea' rows="10" cols="5"></textarea>
+                    </ul>
 
                 </div>
 

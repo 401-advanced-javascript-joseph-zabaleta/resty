@@ -2,7 +2,7 @@ import React from 'react';
 import './app.scss';
 
 import Header from './components/header/header.jsx';
-import Form from './components/form/form.jsx';
+import Main from './components/main/main.jsx';
 import Footer from './components/footer/footer.jsx';
 
 export default class App extends React.Component {
@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
             <div>
                 <Header />
-                <Form />
+                <Main />
                 <Footer />
             </div>
 
