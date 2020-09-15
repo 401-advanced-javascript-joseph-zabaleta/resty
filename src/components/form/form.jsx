@@ -93,6 +93,37 @@ export default class Form extends React.Component {
 
                 break;
 
+
+            case 'PUT':
+
+                let updateBody;
+
+                try {
+
+                    updateBody = JSON.parse(this.state.requestBody);
+
+                } catch (error) {
+
+                    this.setState({
+                        errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
+                    });
+
+                    return;
+
+                };
+
+                try {
+
+                    results = await axios.put(this.state.url, updateBody, config);
+
+                } catch (error) {
+
+                    throw error;
+
+                };
+
+                break;
+
             default:
                 break;
 
