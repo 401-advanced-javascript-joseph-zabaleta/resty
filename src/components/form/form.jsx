@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import MethodButton from './methodButton.jsx';
 import ErrorComponent from '../error/error.jsx';
+import StorageService from '../../utils/storage-service.js';
 
 export default class Form extends React.Component {
 
@@ -13,7 +14,7 @@ export default class Form extends React.Component {
         this.state = {
 
             method: 'GET',
-            url: '',
+            url: 'http://localhost:3001/api/v1/categories',
             requestBody: {},
             errorText: '',
 
@@ -49,6 +50,13 @@ export default class Form extends React.Component {
         let results;
         let config = { crossdomain: true };
 
+        let entry = {
+            url: this.state.url,
+            method: this.state.method,
+            body: this.state.requestBody,
+        };
+
+
         switch (this.state.method) {
 
             case 'GET':
@@ -56,6 +64,7 @@ export default class Form extends React.Component {
                 try {
 
                     results = await axios.get(this.state.url, config);
+
 
                 } catch (error) {
                     throw error;
@@ -147,6 +156,8 @@ export default class Form extends React.Component {
         });
 
         this.props.processResults(results);
+
+        StorageService.save(entry);
 
     };
 
