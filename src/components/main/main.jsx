@@ -2,6 +2,7 @@ import React from 'react';
 
 import Form from '../form/form.jsx';
 import Results from '../results/results.jsx';
+import History from '../history/history.jsx';
 import './main.scss';
 
 export default class Main extends React.Component {
@@ -34,9 +35,11 @@ export default class Main extends React.Component {
             <div id='main'>
                 <Form processResults={this.processResults} />
 
-
+                <section>
+                    <History />
                     <Results results={this.state.results} />
-                    
+                </section>
+
             </div>
 
         );

@@ -15,8 +15,8 @@ export default class StorageService {
      */
     static save(item) {
 
-        let results = this.retrieve();
-        let requestHistory = JSON.parse(results);
+        let requestHistory = this.retrieve();
+
 
 
         if (!this._compare(item, requestHistory)) {
@@ -60,11 +60,11 @@ export default class StorageService {
 
         if (this._isPresent()) {
 
-            return localStorage.getItem('requestHistory');
+            return JSON.parse(localStorage.getItem('requestHistory'));
 
         } else {
 
-            return JSON.stringify([]);
+            return [];
 
         };
 
