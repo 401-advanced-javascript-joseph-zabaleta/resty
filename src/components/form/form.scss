@@ -21,14 +21,17 @@
 #form {
 
     padding: 2%;
-    width: 50vw;
+    width: 75vw;
     font-family: design.$primary-font;
+
 
     input {
 
         text-decoration: none;
+        width: 500px;
 
     }
+
 
     label {
 
@@ -42,11 +45,12 @@
 
         display: flex;
         list-style: none;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         padding-right: 2%;
 
     }
+
 
         li {
 
@@ -60,16 +64,25 @@
         }
 
 
-
         li.activeButton {
 
             background-color: design.$li-background-color-active;
 
         }
 
+
         li:hover {
 
             background-color: design.$li-hover;
+
+        }
+
+
+        textarea {
+
+            min-width: 300px;
+            max-width: 100%;
+            max-height: 75px;
 
         }
 

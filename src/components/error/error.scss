@@ -1,0 +1,6 @@
+@use '../../design/design';
+
+#errorBanner {
+    color: design.$primary-error-color;
+    font-weight: bold;
+}

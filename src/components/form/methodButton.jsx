@@ -21,7 +21,7 @@ export default class MethodButton extends React.Component {
 
         return (
 
-            <li class={className} onClick={this.handleClick}>
+            <li className={className} onClick={this.handleClick}>
                 {this.props.method}
             </li>
 
