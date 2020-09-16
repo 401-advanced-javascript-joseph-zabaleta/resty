@@ -1,0 +1,24 @@
+@use './variables' as *;
+
+// Font
+$primary-font: $times-new-roman;
+
+// App Variables
+$primary-app-background-color: $offwhite;
+$primary-app-color: $black;
+
+
+
+// Header Variables
+$primary-header-background-color: $black;
+$primary-header-color: $white;
+
+// Form Declared Colors
+$li-border-color: $black;
+$li-background-color-inactive: $lightgrey;
+$li-background-color-active: $white;
+$li-hover: $whitesmoke;
+$display-section: $whitesmoke;
+
+// Footer Variables
+$primary-footer-color: $grey;

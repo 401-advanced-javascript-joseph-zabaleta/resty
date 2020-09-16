@@ -1,1 +1,96 @@
-// place holder
+@use '../../design/design';
+
+
+#form-container {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+}
+
+#url-input {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+#form {
+
+    padding: 2%;
+    width: 50vw;
+    font-family: design.$primary-font;
+
+    input {
+
+        text-decoration: none;
+
+    }
+
+    label {
+
+        padding-right: 5px;
+
+    }
+
+
+
+    ul {
+
+        display: flex;
+        list-style: none;
+        align-items: center;
+        justify-content: center;
+        padding-right: 2%;
+
+    }
+
+        li {
+
+            display: inline;
+            border-radius: 5px;
+            border: 1px solid design.$li-border-color;
+            padding: 2%;
+            margin: 1% 3%;
+            background-color: design.$li-background-color-inactive;
+
+        }
+
+
+
+        li.activeButton {
+
+            background-color: design.$li-background-color-active;
+
+        }
+
+        li:hover {
+
+            background-color: design.$li-hover;
+
+        }
+
+}
+
+#display {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    background-color: design.$display-section;
+    width: 25vw;
+    min-width: 400px;
+
+
+    p {
+
+        padding: 1%;
+        border-radius: 10px;
+
+    }
+
+}

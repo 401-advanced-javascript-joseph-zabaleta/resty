@@ -1,1 +1,15 @@
-// place holder
+@use '../../design/design';
+
+header {
+
+    background: design.$primary-header-background-color;
+    width: 100vw;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    h1 {
+        color: design.$primary-header-color;
+    }
+
+}

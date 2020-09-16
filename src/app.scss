@@ -1,0 +1,18 @@
+@use './design/design';
+
+body {
+
+    margin: 0 0;
+
+}
+
+div {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: design.$primary-app-background-color;
+    color: design.$primary-app-color;
+
+}
