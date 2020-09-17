@@ -21,8 +21,6 @@ export default class StorageService {
 
         if (!this._compare(item, requestHistory)) {
 
-            console.log('unique item!!!!');
-
             requestHistory.push(item);
             localStorage.setItem('requestHistory', JSON.stringify(requestHistory));
 
@@ -43,8 +41,7 @@ export default class StorageService {
 
         history.forEach(entry => {
 
-            if (_.isEqual(item, entry)) {
-                console.log('I am not a unique person!!!!!!!!!!!!!!!')
+            if (_.isEqual(item.request, entry.request)) {
                 flag = true;
             };
 

@@ -17,8 +17,8 @@ export default function History(props) {
 
 
                     <span>
-                        <button onClick={() => props.updateFormDefaults(entry)}>{entry.method}</button>
-                        {entry.url}
+                        <button onClick={() => props.updateFormDefaults(entry)}>{entry.request.method}</button>
+                        {entry.request.url}
                     </span>
 
                 </div>

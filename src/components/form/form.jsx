@@ -33,9 +33,9 @@ export default class Form extends React.Component {
 
         if (!_.isEqual(previousProps.request, this.props.request)) {
             this.setState({
-                method: this.props.request.method,
-                url: this.props.request.url,
-                data: this.props.request.data,
+                method: this.props.request.request.method,
+                url: this.props.request.request.url,
+                data: this.props.request.request.data,
             })
         };
 

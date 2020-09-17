@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 
 import Form from '../form/form.jsx';
+import List from '../list/list.jsx';
 import Results from '../results/results.jsx';
 import History from '../history/history.jsx';
 import ErrorComponent from '../error/error.jsx';
@@ -62,7 +63,7 @@ export default class Main extends React.Component {
 
             let response = await axios(request, config);
 
-            let history = StorageService.save(request);
+            let history = StorageService.save({ request, response });
 
             this.setState({
                 results: response,
@@ -110,7 +111,7 @@ export default class Main extends React.Component {
                     </Route>
 
                     <Route exact path='/history'>
-                        <h1> I am history!</h1>
+                        <List />
                     </Route>
 
                     <Route exact path='/About'>

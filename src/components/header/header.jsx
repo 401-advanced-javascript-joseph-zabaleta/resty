@@ -18,10 +18,10 @@ export default class Header extends React.Component {
                             <Link to='/'>Home</Link>
                         </li>
                         <li>
-                            <NavLink activeClassName="activeButton" to='/history'>History</NavLink>
+                            <NavLink activeClassName="active" to='/history'>History</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="activeButton" to='/about'>About</NavLink>
+                            <NavLink activeClassName="active" to='/about'>About</NavLink>
                         </li>
                     </ul>
                 </nav>
