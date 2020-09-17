@@ -77,7 +77,8 @@ export default class Form extends React.Component {
             padding: "3px",
             "borderRadius": "5px",
             "minHeight": "100px",
-            width: "200px"
+            minWidth: "50%",
+            // width: "30%"
         }
 
         return (
@@ -108,7 +109,6 @@ export default class Form extends React.Component {
                         <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback} />
                         <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback} />
 
-                        {/* <textarea onChange={this.handleRequestBodyChange} value={JSON.stringify(this.state.data)} id='request-body-textarea' rows="10" cols="5"></textarea> */}
                         <ReactJson src={this.state.data} style={style} displayDataTypes={false} onEdit={this.handleRequestBodyChange} onAdd={this.handleRequestBodyChange} theme="tube" />
                     </ul>
 

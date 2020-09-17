@@ -9,7 +9,7 @@ export default function Results(props) {
     if (!props.results) return (<></>);
 
     let style = {
-        padding: "3px",
+        padding: "5px",
         "borderRadius": "5px",
         "minHeight": "100px",
     }

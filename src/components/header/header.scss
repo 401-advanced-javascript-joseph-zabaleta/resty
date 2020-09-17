@@ -3,7 +3,9 @@
 header {
 
     background: design.$primary-header-background-color;
-    width: 100vw;
+    // width: 100vw;
+    width: 100%;
+    min-width: 400px;
     display: flex;
     align-content: center;
     justify-content: center;

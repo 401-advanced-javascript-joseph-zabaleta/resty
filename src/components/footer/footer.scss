@@ -4,8 +4,13 @@ footer {
 
     background: design.$primary-footer-color;
     width: 100vw;
+    min-width: 400px;
+    // height: 20px;
+    padding: 3px;
     display: flex;
-    align-content: center;
+    // flex-direction: column;
+    // align-content: center;
     justify-content: center;
+    // align-items: center;
 
 }
