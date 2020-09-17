@@ -1,29 +1,42 @@
 import React from 'react';
 import './form.scss';
-import axios from 'axios';
+import _ from 'lodash';
 
 import MethodButton from './methodButton.jsx';
-import ErrorComponent from '../error/error.jsx';
-import StorageService from '../../utils/storage-service.js';
 
 export default class Form extends React.Component {
 
     constructor(props) {
 
+        const method = props.request.method || 'GET'
+        const url = props.request.url || ''
+        const data = props.request.data || {}
+
+
         super(props);
         this.state = {
 
-            method: 'GET',
-            url: 'http://localhost:3001/api/v1/categories',
-            requestBody: {},
-            errorText: '',
+            method,
+            url,
+            data,
 
         };
 
         this.handleURLChange = this.handleURLChange.bind(this);
         this.handleRequestBodyChange = this.handleRequestBodyChange.bind(this);
-        this.executeRequest = this.executeRequest.bind(this);
         this.listCallback = this.listCallback.bind(this);
+
+    };
+
+    componentDidUpdate(previousProps) {
+
+        if (!_.isEqual(previousProps.request, this.props.request)) {
+            this.setState({
+                method: this.props.request.method,
+                url: this.props.request.url,
+                data: this.props.request.body,
+            })
+        };
 
     };
 
@@ -40,124 +53,8 @@ export default class Form extends React.Component {
     handleRequestBodyChange(e) {
 
         this.setState({
-            requestBody: e.target.value
+            data: e.target.value
         });
-
-    };
-
-    async executeRequest(e) {
-
-        let results;
-        let config = { crossdomain: true };
-
-        let entry = {
-            url: this.state.url,
-            method: this.state.method,
-            body: this.state.requestBody,
-        };
-
-
-        switch (this.state.method) {
-
-            case 'GET':
-
-                try {
-
-                    results = await axios.get(this.state.url, config);
-
-
-                } catch (error) {
-                    throw error;
-                };
-
-                break;
-
-            case 'POST':
-
-                let requestBody;
-
-                try {
-
-                    requestBody = JSON.parse(this.state.requestBody);
-
-                } catch (error) {
-
-                    this.setState({
-                        errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
-                    });
-
-                    return;
-
-                };
-
-                try {
-
-                    results = await axios.post(this.state.url, requestBody, config);
-
-                } catch (error) {
-
-                    throw error;
-
-                };
-
-                break;
-
-
-            case 'PUT':
-
-                let updateBody;
-
-                try {
-
-                    updateBody = JSON.parse(this.state.requestBody);
-
-                } catch (error) {
-
-                    this.setState({
-                        errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
-                    });
-
-                    return;
-
-                };
-
-                try {
-
-                    results = await axios.put(this.state.url, updateBody, config);
-
-                } catch (error) {
-
-                    throw error;
-
-                };
-
-                break;
-
-
-            case 'DELETE':
-
-                try {
-
-                    results = await axios.delete(this.state.url, config);
-
-                } catch (error) {
-                    throw error;
-                };
-
-                break;
-
-            default:
-                break;
-
-        }
-
-        this.setState({
-            errorText: ''
-        });
-
-        this.props.processResults(results);
-
-        StorageService.save(entry);
 
     };
 
@@ -165,8 +62,7 @@ export default class Form extends React.Component {
     listCallback(method) {
 
         this.setState({
-            method: method,
-            displaySection: false,
+            method,
         });
 
     };
@@ -178,7 +74,7 @@ export default class Form extends React.Component {
 
             <div id='form-container'>
 
-                <ErrorComponent errorText={this.state.errorText} />
+                {this.props.children}
 
                 <div id='form'>
 
@@ -189,7 +85,7 @@ export default class Form extends React.Component {
 
                         <input onChange={this.handleURLChange} value={this.state.url} type='text'></input>
 
-                        <button onClick={this.executeRequest}>
+                        <button onClick={() => { this.props.executeRequest(this.state) }}>
                             GO!
                         </button>
                     </section>
