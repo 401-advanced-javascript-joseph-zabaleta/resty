@@ -55,19 +55,14 @@ body {
     min-width: 400px;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // align-content: center;
 
     #root {
 
         display: flex;
         flex-direction: column;
         justify-content: center;
-        // min-width: 400px;
         width: 100%;
         align-items: center;
-        // padding: 5px;
         background-color: design.$primary-app-background-color;
         color: design.$primary-app-color;
 

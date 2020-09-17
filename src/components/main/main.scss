@@ -1,38 +1,17 @@
 #main {
+
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
     width: 100%;
 
     section {
+
         display: flex;
         flex-direction: row;
-        // align-content: center;
-        // align-items: center;
         justify-content: center;
         width: 100%;
-        // align-content: center;
 
-        // #history-container {
-        //     display: flex;
-        //     border: 1px solid black;
-        //     flex-direction: column;
-        //     justify-content: flex-start;
-        //     margin-right: 15px;
-        //     margin-bottom: 10px;
-        //     width: 50%;
-        //     padding: 5px;
-        //     overflow-x: hidden;
-
-        //     div {
-        //         display: flex;
-        //         align-items: flex-start;
-        //         width: 100%;
-        //         text-align: left;
-        //     }
-
-        // }
     }
 }
 
