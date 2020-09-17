@@ -7,13 +7,15 @@ import History from '../history/history.jsx';
 import ErrorComponent from '../error/error.jsx';
 import StorageService from '../../utils/storage-service.js';
 import './main.scss';
-import { render } from 'react-dom';
+
 
 export default class Main extends React.Component {
 
     constructor(props) {
-        super(props)
 
+        const history = StorageService.retrieve();
+
+        super(props)
         this.state = {
             results: null,
             request: {
@@ -21,23 +23,15 @@ export default class Main extends React.Component {
                 url: '',
                 data: {},
             },
-            history: [],
+            history,
             errorText: '',
         };
 
-        // this.processResults = this.processResults.bind(this);
         this.executeRequest = this.executeRequest.bind(this);
         this.updateFormDefaults = this.updateFormDefaults.bind(this);
     };
 
 
-    // processResults(results) {
-
-    //     this.setState({
-    //         results: results
-    //     });
-
-    // };
 
     async executeRequest(request) {
 
@@ -64,12 +58,14 @@ export default class Main extends React.Component {
 
             let response = await axios(request, config);
 
+            let history = StorageService.save(request);
+
             this.setState({
                 results: response,
+                history,
                 errorText: ''
             });
 
-            StorageService.save(request);
 
 
         } catch (error) {
@@ -99,8 +95,8 @@ export default class Main extends React.Component {
                 </Form>
 
                 <section>
-                    {/* <History updateFormDefaults={this.updateFormDefaults} /> */}
-                    {/* <Results results={this.state.results} /> */}
+                    <History history={this.state.history} updateFormDefaults={this.updateFormDefaults} />
+                    <Results results={this.state.results} />
                 </section>
 
             </div>

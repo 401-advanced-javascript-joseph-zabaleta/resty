@@ -1,18 +1,15 @@
 import React from 'react';
-import StorageService from '../../utils/storage-service.js';
+
 
 export default function History(props) {
 
-    let requestHistory = StorageService.retrieve();
-
-
-
+    if (props.history.length === 0) return (<></>);
 
     return (
 
         <div id='history-container'>
 
-            { requestHistory.map((entry, index) => (
+            { props.history.slice(0).reverse().map((entry, index) => (
 
 
                 <div key={index}>
