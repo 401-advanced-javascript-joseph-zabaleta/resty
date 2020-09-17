@@ -37,21 +37,23 @@ export default class Main extends React.Component {
 
         let config = { crossdomain: true };
 
-        try {
+        // try {
 
-            if (request.method === 'PUT' || request.method === 'POST') {
+        //     if (request.method === 'PUT' || request.method === 'POST') {
 
-                request.data = JSON.parse(request.data);
-            };
+        //         // request.data = JSON.parse(request.data);
+        //     };
 
-        } catch (error) {
+        // } catch (error) {
 
-            this.setState({
-                errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
-            });
+        //     console.log(error);
 
-            return;
-        }
+        //     this.setState({
+        //         errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
+        //     });
+
+        //     return;
+        // }
 
 
         try {

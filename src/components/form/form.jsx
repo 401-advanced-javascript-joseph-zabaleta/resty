@@ -1,6 +1,7 @@
 import React from 'react';
 import './form.scss';
 import _ from 'lodash';
+import ReactJson from 'react-json-view';
 
 import MethodButton from './methodButton.jsx';
 
@@ -52,8 +53,10 @@ export default class Form extends React.Component {
 
     handleRequestBodyChange(e) {
 
+        console.log(e)
+
         this.setState({
-            data: e.target.value
+            data: e.updated_src
         });
 
     };
@@ -69,6 +72,13 @@ export default class Form extends React.Component {
 
 
     render() {
+
+        let style = {
+            padding: "3px",
+            "borderRadius": "5px",
+            "minHeight": "100px",
+            width: "200px"
+        }
 
         return (
 
@@ -98,7 +108,8 @@ export default class Form extends React.Component {
                         <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback} />
                         <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback} />
 
-                        <textarea onChange={this.handleRequestBodyChange} id='request-body-textarea' rows="10" cols="5"></textarea>
+                        {/* <textarea onChange={this.handleRequestBodyChange} value={JSON.stringify(this.state.data)} id='request-body-textarea' rows="10" cols="5"></textarea> */}
+                        <ReactJson src={this.state.data} style={style} displayDataTypes={false} onEdit={this.handleRequestBodyChange} onAdd={this.handleRequestBodyChange} theme="tube" />
                     </ul>
 
                 </div>
