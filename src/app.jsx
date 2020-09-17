@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './app.scss';
 
 import Header from './components/header/header.jsx';
@@ -12,9 +13,11 @@ export default class App extends React.Component {
         return (
 
             <>
-                <Header />
-                <Main />
-                <Footer />
+                <BrowserRouter>
+                    <Header />
+                    <Main />
+                    <Footer />
+                </BrowserRouter>
             </>
 
         );

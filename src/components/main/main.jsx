@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
+
 
 import Form from '../form/form.jsx';
 import Results from '../results/results.jsx';
@@ -92,14 +94,35 @@ export default class Main extends React.Component {
         return (
 
             <div id='main'>
-                <Form request={this.state.request} executeRequest={this.executeRequest} >
-                    <ErrorComponent errorText={this.state.errorText} />
-                </Form>
 
-                <section>
-                    <History history={this.state.history} updateFormDefaults={this.updateFormDefaults} />
-                    <Results results={this.state.results} />
-                </section>
+                <Switch>
+                    <Route exact path='/'>
+
+                        <Form request={this.state.request} executeRequest={this.executeRequest} >
+                            <ErrorComponent errorText={this.state.errorText} />
+                        </Form>
+
+                        <section>
+                            <History history={this.state.history} updateFormDefaults={this.updateFormDefaults} />
+                            <Results results={this.state.results} />
+                        </section>
+
+                    </Route>
+
+                    <Route exact path='/history'>
+                        <h1> I am history!</h1>
+                    </Route>
+
+                    <Route exact path='/About'>
+                        <h1> About coming soon!</h1>
+                    </Route>
+
+                    <Route>
+                        <div> 404 error , no route found!</div>
+                    </Route>
+
+                </Switch>
+
 
             </div>
 

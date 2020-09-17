@@ -2,15 +2,56 @@
 
 header {
 
-    background: design.$primary-header-background-color;
     width: 100vw;
     min-width: 400px;
     display: flex;
-    align-content: center;
-    justify-content: center;
+    flex-direction: column;
+    // align-content: center;
+    // justify-content: center;
+    background: design.$primary-header-background-color;
 
     h1 {
+        text-align: center;
         color: design.$primary-header-color;
+    }
+
+    nav {
+        background-color: rgb(107, 57, 57);
+        height: 25px;
+        display: flex;
+
+
+        ul {
+
+            display: flex;
+
+            li {
+                display: flex;
+                align-items: center;
+                color: white;
+                padding: .5rem 2rem;
+                font-size: 1.1em;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+
+                    a.here {
+                        color: white;
+                    }
+                }
+
+            }
+
+            li.activeButton {
+                background-color: black;
+            }
+
+            li:hover {
+                background-color: black;
+            }
+
+        }
     }
 
 }
