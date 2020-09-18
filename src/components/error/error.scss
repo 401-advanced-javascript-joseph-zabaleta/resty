@@ -3,4 +3,10 @@
 #errorBanner {
     color: design.$primary-error-color;
     font-weight: bold;
+
+    p {
+        text-align: center;
+        padding: 5px;
+    }
+
 }

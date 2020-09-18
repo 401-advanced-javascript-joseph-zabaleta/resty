@@ -40,28 +40,19 @@ export default class Main extends React.Component {
 
         let config = { crossdomain: true };
 
-        // try {
-
-        //     if (request.method === 'PUT' || request.method === 'POST') {
-
-        //         // request.data = JSON.parse(request.data);
-        //     };
-
-        // } catch (error) {
-
-        //     console.log(error);
-
-        //     this.setState({
-        //         errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
-        //     });
-
-        //     return;
-        // }
-
-
         try {
 
+            if (!request.url) {
+                this.setState({
+                    errorText: 'Please provide a valid endpoint URL'
+                });
+
+                return;
+            }
+
             let response = await axios(request, config);
+
+            // console.log(response);
 
             let history = StorageService.save({ request, response });
 
@@ -74,7 +65,11 @@ export default class Main extends React.Component {
 
 
         } catch (error) {
-            throw error;
+
+            this.setState({
+                errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
+            });
+            // throw error;
         };
 
     };
