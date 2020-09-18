@@ -114,8 +114,8 @@ export default class Main extends React.Component {
                         <List history={this.state.history} />
                     </Route>
 
-                    <Route exact path='/About'>
-                        <h1> About coming soon!</h1>
+                    <Route exact path='/Help'>
+                        <h1> Help coming soon!</h1>
                     </Route>
 
                     <Route>

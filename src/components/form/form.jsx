@@ -78,7 +78,6 @@ export default class Form extends React.Component {
             "borderRadius": "5px",
             "minHeight": "100px",
             minWidth: "50%",
-            // width: "30%"
         }
 
         return (
@@ -109,7 +108,10 @@ export default class Form extends React.Component {
                         <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback} />
                         <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback} />
 
-                        <ReactJson src={this.state.data} style={style} displayDataTypes={false} onEdit={this.handleRequestBodyChange} onAdd={this.handleRequestBodyChange} theme="tube" />
+                        {this.state.method === 'GET' || this.state.method === 'DELETE' ? <></> :
+
+                            <ReactJson src={this.state.data} style={style} displayDataTypes={false} onEdit={this.handleRequestBodyChange} onAdd={this.handleRequestBodyChange} theme="tube" />
+                        }
                     </ul>
 
                 </div>
