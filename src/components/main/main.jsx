@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 
 import Form from '../form/form.jsx';
-import List from '../list/list.jsx';
+import List from '../history/list/list.jsx';
 import Results from '../results/results.jsx';
 import History from '../history/history.jsx';
 import ErrorComponent from '../error/error.jsx';
@@ -111,7 +111,7 @@ export default class Main extends React.Component {
                     </Route>
 
                     <Route exact path='/history'>
-                        <List />
+                        <List history={this.state.history} />
                     </Route>
 
                     <Route exact path='/About'>
