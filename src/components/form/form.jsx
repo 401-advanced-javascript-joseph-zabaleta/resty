@@ -1,28 +1,43 @@
 import React from 'react';
 import './form.scss';
-import axios from 'axios';
+import _ from 'lodash';
+import ReactJson from 'react-json-view';
 
 import MethodButton from './methodButton.jsx';
-import ErrorComponent from '../error/error.jsx';
 
 export default class Form extends React.Component {
 
     constructor(props) {
 
+        const method = props.request.method || 'GET'
+        const url = props.request.url || ''
+        const data = props.request.data || {}
+
+
         super(props);
         this.state = {
 
-            method: 'GET',
-            url: '',
-            requestBody: {},
-            errorText: '',
+            method,
+            url,
+            data,
 
         };
 
         this.handleURLChange = this.handleURLChange.bind(this);
         this.handleRequestBodyChange = this.handleRequestBodyChange.bind(this);
-        this.executeRequest = this.executeRequest.bind(this);
         this.listCallback = this.listCallback.bind(this);
+
+    };
+
+    componentDidUpdate(previousProps) {
+
+        if (!_.isEqual(previousProps.request, this.props.request)) {
+            this.setState({
+                method: this.props.request.request.method,
+                url: this.props.request.request.url,
+                data: this.props.request.request.data,
+            })
+        };
 
     };
 
@@ -38,115 +53,11 @@ export default class Form extends React.Component {
 
     handleRequestBodyChange(e) {
 
-        this.setState({
-            requestBody: e.target.value
-        });
-
-    };
-
-    async executeRequest(e) {
-
-        let results;
-        let config = { crossdomain: true };
-
-        switch (this.state.method) {
-
-            case 'GET':
-
-                try {
-
-                    results = await axios.get(this.state.url, config);
-
-                } catch (error) {
-                    throw error;
-                };
-
-                break;
-
-            case 'POST':
-
-                let requestBody;
-
-                try {
-
-                    requestBody = JSON.parse(this.state.requestBody);
-
-                } catch (error) {
-
-                    this.setState({
-                        errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
-                    });
-
-                    return;
-
-                };
-
-                try {
-
-                    results = await axios.post(this.state.url, requestBody, config);
-
-                } catch (error) {
-
-                    throw error;
-
-                };
-
-                break;
-
-
-            case 'PUT':
-
-                let updateBody;
-
-                try {
-
-                    updateBody = JSON.parse(this.state.requestBody);
-
-                } catch (error) {
-
-                    this.setState({
-                        errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
-                    });
-
-                    return;
-
-                };
-
-                try {
-
-                    results = await axios.put(this.state.url, updateBody, config);
-
-                } catch (error) {
-
-                    throw error;
-
-                };
-
-                break;
-
-
-            case 'DELETE':
-
-                try {
-
-                    results = await axios.delete(this.state.url, config);
-
-                } catch (error) {
-                    throw error;
-                };
-
-                break;
-
-            default:
-                break;
-
-        }
+        console.log(e)
 
         this.setState({
-            errorText: ''
+            data: e.updated_src
         });
-
-        this.props.processResults(results);
 
     };
 
@@ -154,8 +65,7 @@ export default class Form extends React.Component {
     listCallback(method) {
 
         this.setState({
-            method: method,
-            displaySection: false,
+            method,
         });
 
     };
@@ -163,11 +73,18 @@ export default class Form extends React.Component {
 
     render() {
 
+        let style = {
+            padding: "3px",
+            "borderRadius": "5px",
+            "minHeight": "100px",
+            minWidth: "50%",
+        }
+
         return (
 
             <div id='form-container'>
 
-                <ErrorComponent errorText={this.state.errorText} />
+                {this.props.children}
 
                 <div id='form'>
 
@@ -178,7 +95,7 @@ export default class Form extends React.Component {
 
                         <input onChange={this.handleURLChange} value={this.state.url} type='text'></input>
 
-                        <button onClick={this.executeRequest}>
+                        <button onClick={() => { this.props.executeRequest(this.state) }}>
                             GO!
                         </button>
                     </section>
@@ -191,7 +108,10 @@ export default class Form extends React.Component {
                         <MethodButton method='PUT' activeMethod={this.state.method} methodChange={this.listCallback} />
                         <MethodButton method='DELETE' activeMethod={this.state.method} methodChange={this.listCallback} />
 
-                        <textarea onChange={this.handleRequestBodyChange} id='request-body-textarea' rows="10" cols="5"></textarea>
+                        {this.state.method === 'GET' || this.state.method === 'DELETE' ? <></> :
+
+                            <ReactJson src={this.state.data} style={style} displayDataTypes={false} onEdit={this.handleRequestBodyChange} onAdd={this.handleRequestBodyChange} theme="tube" />
+                        }
                     </ul>
 
                 </div>

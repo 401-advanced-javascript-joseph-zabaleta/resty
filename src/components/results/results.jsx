@@ -9,7 +9,9 @@ export default function Results(props) {
     if (!props.results) return (<></>);
 
     let style = {
-        width: "500px",
+        padding: "5px",
+        "borderRadius": "5px",
+        "minHeight": "100px",
     }
 
     return (
@@ -17,26 +19,21 @@ export default function Results(props) {
         <div id='response-container'>
 
 
+            <h3>
+                Headers
+            </h3>
             <div id='header-container'>
-                <h3>
-                    Headers
-                </h3>
-                {/* <pre>
-                    {JSON.stringify(props.results.headers, null, 2)}
-                </pre> */}
-                <ReactJson src={props.results.headers} style={style} />
+
+                <ReactJson src={props.results.headers} style={style} displayDataTypes={false} theme="tube" />
 
             </div>
 
+            <h3>
+                Results: {props.results.data.length} items
+            </h3>
             <div id='results-container'>
-                <h3>
-                    Results: {props.results.data.length} items
-                </h3>
-                {/* <pre>
-                    {JSON.stringify(props.results.data, null, 2)}
-                </pre> */}
 
-                <ReactJson src={props.results.data} />
+                <ReactJson src={props.results.data} style={style} displayDataTypes={false} theme="tube" />
 
             </div>
 

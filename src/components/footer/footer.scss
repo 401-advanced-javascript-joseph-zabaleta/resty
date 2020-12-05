@@ -4,8 +4,9 @@ footer {
 
     background: design.$primary-footer-color;
     width: 100vw;
+    min-width: 400px;
+    padding: 3px;
     display: flex;
-    align-content: center;
     justify-content: center;
 
 }

@@ -1,1 +1,27 @@
-// place holder
+#history-container {
+
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    div {
+
+        display: flex;
+        flex-direction: row;
+
+
+        span {
+
+            margin: 5px;
+
+            button {
+
+                margin-right: 5px;
+
+            }
+
+        }
+
+    }
+
+}

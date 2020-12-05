@@ -1,26 +1,84 @@
 import React from 'react';
+import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
+
 
 import Form from '../form/form.jsx';
+import List from '../history/list/list.jsx';
 import Results from '../results/results.jsx';
+import History from '../history/history.jsx';
+import ErrorComponent from '../error/error.jsx';
+import StorageService from '../../utils/storage-service.js';
 import './main.scss';
+
 
 export default class Main extends React.Component {
 
     constructor(props) {
-        super(props)
 
+        const history = StorageService.retrieve();
+
+        super(props)
         this.state = {
             results: null,
+            request: {
+                method: 'GET',
+                url: '',
+                data: {},
+            },
+            history,
+            errorText: '',
         };
 
-        this.processResults = this.processResults.bind(this);
+        this.executeRequest = this.executeRequest.bind(this);
+        this.updateFormDefaults = this.updateFormDefaults.bind(this);
     };
 
 
-    processResults(results) {
+
+    async executeRequest(request) {
+
+        let config = { crossdomain: true };
+
+        try {
+
+            if (!request.url) {
+                this.setState({
+                    errorText: 'Please provide a valid endpoint URL'
+                });
+
+                return;
+            }
+
+            let response = await axios(request, config);
+
+            // console.log(response);
+
+            let history = StorageService.save({ request, response });
+
+            this.setState({
+                results: response,
+                history,
+                errorText: ''
+            });
+
+
+
+        } catch (error) {
+
+            this.setState({
+                errorText: 'Invalid Request Body. Please ensure the request body is in proper JSON format'
+            });
+            // throw error;
+        };
+
+    };
+
+
+    updateFormDefaults(entry) {
 
         this.setState({
-            results: results
+            request: entry
         });
 
     };
@@ -32,11 +90,36 @@ export default class Main extends React.Component {
         return (
 
             <div id='main'>
-                <Form processResults={this.processResults} />
+
+                <Switch>
+                    <Route exact path='/'>
+
+                        <Form request={this.state.request} executeRequest={this.executeRequest} >
+                            <ErrorComponent errorText={this.state.errorText} />
+                        </Form>
+
+                        <section>
+                            <History history={this.state.history} updateFormDefaults={this.updateFormDefaults} />
+                            <Results results={this.state.results} />
+                        </section>
+
+                    </Route>
+
+                    <Route exact path='/history'>
+                        <List history={this.state.history} />
+                    </Route>
+
+                    <Route exact path='/Help'>
+                        <h1> Help coming soon!</h1>
+                    </Route>
+
+                    <Route>
+                        <div> 404 error , no route found!</div>
+                    </Route>
+
+                </Switch>
 
 
-                    <Results results={this.state.results} />
-                    
             </div>
 
         );
